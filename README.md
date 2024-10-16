@@ -1,6 +1,6 @@
 # 📝 Django Blog Application
 
-A simple blog platform where users can **view, create, and edit posts**. The app allows public browsing of posts and offers features such as **user authentication** and **personalized content editing**.
+A simple casually created blog platform where users can **view, create, and edit posts**. The app allows public browsing of posts and offers features such as **user authentication** and **personalized content editing**.
 
 ---
 
@@ -44,6 +44,12 @@ A simple blog platform where users can **view, create, and edit posts**. The app
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository_url>
-   cd <repository_folder>
+   git clone https://github.com/Seemant-RajSingh/django_blog.git
+   cd blog
 
+2. Install requirements:
+   ```bash
+   pip install -r requirements.txt
+4. Run:
+   ```bash
+   python manage.py runserver
