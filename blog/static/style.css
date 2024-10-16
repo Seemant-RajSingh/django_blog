@@ -1,0 +1,188 @@
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  padding: 20px;
+  background: #ffffb3; /* Light yellow background */
+  color: #fff;
+}
+
+/* Header */
+.header {
+  height: 100px;
+  width: 500px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #ffdd57, #ffcc00);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.header h2 {
+  color: #222;
+  font-family: 'Lucida Handwriting', cursive;
+}
+
+/* Column and Card Layout */
+.leftcolumn {
+  float: left;
+  width: 100%;
+}
+
+.card {
+  background-color: #222; /* Black background for cards */
+  color: #fffae5; /* Light text for contrast */
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: 2px solid #f7d358; /* Matching yellow border */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card a {
+  text-decoration: none;
+  color: #fffae5; /* Light text color for links */
+}
+
+.card h2, .card h1 {
+  color: #ffb84d; /* Matching yellow for headings */
+}
+
+.card h5 {
+  color: #ffcc00; /* Slightly darker yellow for date */
+  margin-top: -10px;
+  font-size: 14px;
+}
+
+.card p {
+  color: #fffae5; /* Light text for paragraphs */
+  line-height: 1.6;
+}
+
+/* Clear Floating Elements */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 800px) {
+  .leftcolumn {
+    width: 100%;
+    padding: 0;
+  }
+
+  .header {
+    width: 100%;
+  }
+}
+
+/* Login and Register Styles */
+.login-card, .register-card {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #222;
+    color: #fffae5;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.login-card h1, .register-card h1 {
+    color: #ffb84d;
+}
+
+.submit-btn {
+    background-color: #ffcc00;
+    color: #222;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #ffdd57;
+}
+
+.register-link {
+    margin-top: 15px;
+    color: #fffae5;
+}
+
+.register-link a {
+    color: #ffcc00;
+    text-decoration: none;
+}
+
+#message-list {
+    list-style-type: none; /* Removes the bullet points */
+    padding: 0;            /* Removes default padding */
+    margin: 0;             /* Removes default margin */
+    height: 40px;          /* Fixed height to prevent readjustment */
+    overflow: hidden;      /* Hide overflow */
+}
+
+
+/* Adjusted Header Styles */
+.header {
+  background: linear-gradient(135deg, #ffdd57, #ffcc00);
+  padding: 15px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+/* Style for right section containing username and logout */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Welcome Text */
+.welcome {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Logout Button */
+.logout-btn {
+  background-color: rgba(255, 77, 77, 0.8); /* Slightly transparent red */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 26, 26, 0.9); /* Darker on hover */
+  transform: scale(1.05); /* Slight zoom-in effect */
+}
+
+a {
+text-decoration: none;
+}

@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        .card-content {
+            display: flex;
+        }
+        .card-image {
+            float: left;
+            margin-right: 20px;
+        }
+
+        a {
+            text-decoration: none; /* Removes underline */
+        }
+
+        .post-image {
+            border-radius: 10px; /* Rounded edges */
+            width: 300px; /* Make image responsive */
+            height: 200px; /* Maintain aspect ratio */
+        }
+
+        /* Button styles */
+        .create-button {
+            display: inline-block;
+            background-color: black; /* Black background */
+            color: white; /* White text */
+            padding: 10px 20px; /* Padding around the text */
+            text-align: center; /* Center the text */
+            text-decoration: none; /* Remove underline */
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        .create-button:hover {
+            background-color: darkgray; /* Change color on hover */
+        }
+
+        /* Header styles */
+        .header {
+            background-color: #f6d600;
+            padding: 10px;
+        }
+
+        .header-top {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center; /* Ensure vertical alignment */
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Add space between buttons */
+        }
+
+        .bb {
+            margin-top: auto;
+            margin-bottom: 0px;
+            max-width: 200px;
+        }
+
+        .welcome {
+            font-size: 14px;
+            margin-bottom: auto;
+        }
+
+        /* Separator style */
+        .separator {
+            font-weight: bold;
+            color: black; /* Bar color */
+        }
+
+        /* Home, Logout, and Login button styles */
+        .home-btn,
+        .logout-btn,
+        .login-btn {
+            color: black; /* Black text */
+            background: none; /* No background */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            font-size: 16px; /* Font size */
+            cursor: pointer;
+            position: relative;
+            padding: 10px 15px; /* Added padding for better appearance */
+            transition: background-color 0.3s ease; /* Smooth background color transition */
+        }
+
+        .home-btn:hover, .logout-btn:hover, .login-btn:hover {
+            text-decoration: none;
+        }
+
+        /* Specific hover effect for Login and Logout buttons */
+        .login-btn:hover, .logout-btn:hover {
+            background-color: black; /* Black background on hover */
+            color: white; /* Change text color to white for contrast */
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="header-top">
+        <div class="header-left">
+            <a href="{% url 'posts' %}"><h2 class="bb">Blog Bees</h2></a>
+            {% if user.is_authenticated %}
+            <p class="welcome">Welcome, {{ user.username }}!</p>
+            {% else %}
+            <p class="welcome">Welcome random user</p>
+            {% endif %}
+        </div>
+        <div class="header-right">
+            <a href="/" class="home-btn">Home</a>
+            {% if user.is_authenticated %}
+                <span class="separator">|</span>
+                <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+            {% else %}
+                <span class="separator">|</span>
+                <a href="{% url 'login' %}" class="login-btn">Login</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="leftcolumn">
+        <!-- Create button -->
+        {% if user.is_authenticated %}
+        <a href="/createpost" class="create-button">Create</a>
+        {% endif %}
+
+        {% for post in posts reversed %}
+        <a href="/post/{{ post.id }}">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-image">
+                        {% if post.image %}
+                            <img class="post-image" src="{{ post.image.url }}" alt="Post Image">
+                        {% endif %}
+                    </div>
+                    <div class="card-text">
+                        <h2>{{ post.title }}</h2>
+                        <h5>Published on: {{ post.created_at }}</h5>
+                        <h5>Last Updated on: {{ post.updated_at }}</h5>
+                        <h5 style="color: #ffffcc;">Author: {{ post.author.username }}</h5>
+                        <p>{{ post.content|truncatewords:20 }}</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

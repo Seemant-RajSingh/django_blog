@@ -1,0 +1,80 @@
+/* General Styles */
+
+html, body {
+    height: 100%; /* Ensure the body takes full height */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #f3e5ab, #ffcc33); /* Light honey gradient */
+    color: #333;
+    box-shadow: 50px 50px 20px rgba(0, 0, 0, 0.5); /* Shadow from all sides */
+}
+
+.header {
+    background: #ffcc33; /* Honey color */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header h2 {
+    margin: 0;
+    font-size: 2.5em;
+    color: #6b4f3d; /* Dark brown for text */
+}
+
+.login-btn {
+    background: #6b4f3d; /* Dark brown button */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-btn:hover {
+    background: #b4931e; /* Darker honey on hover */
+}
+
+.content {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #222; /* Dark background for content */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    color: #ffff99;
+}
+
+.content h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #ffcc00 /* Light color for heading */
+}
+
+.content p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+footer {
+    background: #222; /* Dark gray background for the footer */
+    color: #d4c300; /* Slightly yellow color for footer text */
+    text-align: center;
+    padding: 20px; /* Increased padding for better spacing */
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    color: #d4c300; /* Slightly yellow for footer text */
+}

@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BlogB</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="header">
+    <a href="{% url 'posts' %}"><h2>Blog Bees</h2></a>
+    </div>
+
+    <div class="login-card">
+    <h1>Login</h1>
+
+<!--    {% if messages %}-->
+<!--        <ul id="message-list">-->
+<!--            {% for message in messages %}-->
+<!--                <li style="color: #ffffb3;">{{ message }}</li>  &lt;!&ndash; You can customize the style &ndash;&gt;-->
+<!--            {% endfor %}-->
+<!--        </ul>-->
+<!--    {% endif %}-->
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <button type="submit" class="submit-btn">Login</button>
+    </form>
+
+    <p class="register-link">
+        New to BlogB? <a href="#" onclick="showRegisterForm()">Register here</a>
+    </p>
+</div>
+
+<div id="register-container" style="display: none;">
+    {% include 'register.html' %}
+</div>
+
+    <script>
+        function showRegisterForm() {
+            document.querySelector('.login-card').style.display = 'none';
+            document.getElementById('register-container').style.display = 'block';
+        }
+
+        window.onload = function() {
+        const messageList = document.getElementById('message-list');
+        if (messageList) {
+            setTimeout(() => {
+                messageList.style.display = 'none';
+            }, 10000); // 10 seconds
+        }
+    };
+    </script>
+</body>
+</html>

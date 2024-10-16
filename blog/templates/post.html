@@ -1,0 +1,198 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        .post-image {
+            float: left;
+            margin-right: 20px;
+        }
+
+        .container-card {
+            position: relative;
+            overflow: auto;
+            padding: 20px;
+            background-color: #222;
+            color: #fffae5;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: 2px solid #f7d358;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .container-card a {
+            text-decoration: none;
+            color: #fffae5;
+        }
+
+        .container-card h2,
+        .container-card h1 {
+            color: #ffb84d;
+        }
+
+        .container-card h5 {
+            color: #ffcc00;
+            margin-top: -10px;
+            font-size: 14px;
+        }
+
+        .container-card p {
+            line-height: 1.6;
+        }
+
+        /* Header styles */
+        .header {
+            display: flex;
+            background-color: #f6d600;
+            padding: 10px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        .bb {
+            margin-top: auto;
+            margin-bottom: 0px;
+            max-width: 200px;
+        }
+
+        .welcome {
+            font-size: 14px;
+            margin-bottom: auto;
+        }
+
+        /* Separator style */
+        .separator {
+            font-weight: bold;
+            color: black;
+        }
+
+        /* Home and Logout button styles */
+        .home-btn, .logout-btn, .login-btn {
+            color: black;
+            background: none;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            position: relative;
+            padding: 10px 15px; /* Added padding for better appearance */
+            transition: background-color 0.3s ease; /* Smooth background color transition */
+        }
+
+        .home-btn:hover, .logout-btn:hover, .login-btn:hover {
+            text-decoration: none;
+        }
+
+        /* Specific hover effect for Login and Logout buttons */
+        .login-btn:hover, .logout-btn:hover {
+            background-color: black; /* Blue background on hover */
+            color: white; /* Change text color to white for contrast */
+        }
+
+        /* Button Container Styling */
+        .btn-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Edit Button Styling */
+        .edit-btn {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .edit-btn:hover {
+            background-color: #ffcc00;
+        }
+
+        /* Delete Button Styling */
+        .delete-btn {
+            background-color: rgba(255, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: rgba(255, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-top">
+        <div class="header-left">
+            <a href="{% url 'posts' %}"><h2 class="bb">Blog Bees</h2></a>
+            <p class="welcome">{{ user.username }}</p>
+        </div>
+        <div class="header-right">
+            <a href="/" class="home-btn">Home</a>
+            {% if user.is_authenticated %}
+                <span class="separator">|</span>
+                <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+            {% else %}
+                <span class="separator">|</span>
+                <a href="{% url 'login' %}" class="login-btn">Login</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="container-card">
+    {% if post.image %}
+        <img class="post-image" src="{{ post.image.url }}" alt="Post Image">
+    {% endif %}
+
+    <h1>{{ post.title }}</h1>
+    <h5>Published on: {{ post.created_at }}</h5>
+    <h5>Last Updated: {{ post.updated_at }}</h5>
+    <h5 style="color: #ffffcc;">Author: {{ post.author.username }}</h5>
+    <p>{{ post.content }}</p>
+
+    <!-- Display Edit and Delete Buttons only if the logged-in user is the author -->
+    {% if user.is_authenticated and user == post.author %}
+        <div class="btn-container">
+            <a href="{% url 'editpost' post.id %}" class="edit-btn">Edit</a>
+            <a href="{% url 'deletepost' post.id %}"
+               class="delete-btn"
+               onclick="return confirm('Are you sure you want to delete this post?');">
+                Delete
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

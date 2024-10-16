@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <style>
+    /* Form Container Styles */
+    .form-container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #222; /* Black background to match card theme */
+      border-radius: 10px; /* Rounded corners */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    }
+
+    /* Form Title */
+    .form-container h2 {
+      color: #ffb84d; /* Yellow color for headings */
+      text-align: center;
+    }
+
+    /* Form Group */
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    /* Labels */
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #fffae5; /* Light text color for contrast */
+    }
+
+    /* Input Fields */
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #f7d358; /* Matching yellow border */
+      border-radius: 5px; /* Rounded corners */
+      background-color: #333; /* Dark background for input */
+      color: #fffae5; /* Light text color */
+    }
+
+    input[type="file"] {
+      margin-top: 10px;
+      color: #fffae5; /* Light text color for file input */
+    }
+
+    /* Submit Button */
+    .submit-button {
+      background-color: #ffcc00; /* Yellow background */
+      color: #222; /* Dark text for contrast */
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: block; /* Center the button */
+      margin: 20px auto; /* Center alignment */
+      transition: background 0.3s; /* Smooth background transition */
+    }
+
+    .submit-button:hover {
+      background-color: #ffdd57; /* Slightly lighter on hover */
+    }
+
+    a {
+    text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="header">
+      <a href="{% url 'posts' %}"><h2>Blog Bees</h2></a>
+  <div class="header-right">
+    <p class="welcome">{{ user.username }}</p>
+    <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+  </div>
+</div>
+
+<div class="form-container">
+  <h2>Create New Post</h2>
+  <form method="POST" enctype="multipart/form-data" action="{% url 'create' %}">
+    {% csrf_token %}
+    
+    <div class="form-group">
+      <label for="title">Post Title</label>
+      <input type="text" id="title" name="title" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="content">Post Content</label>
+      <textarea id="content" name="content" rows="5" required></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="image">Post Image (optional)</label>
+      <input type="file" id="image" name="image" accept="image/*">
+    </div>
+    
+    <button type="submit" class="submit-button">Create Post</button>
+  </form>
+</div>
+
+</body>
+</html>

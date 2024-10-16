@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Bees</title>
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="header">
+    <a href="{% url 'posts' %}" style="text-decoration: none;"><h2>Blog Bees</h2></a>
+    {% if user.is_authenticated %}
+        <button class="login-btn" onclick="window.location.href='/logout'">Logout</button>
+    {% else %}
+        <button class="login-btn" onclick="window.location.href='/login'">Login</button>
+    {% endif %}
+</div>
+
+<div class="content">
+    <h1>Welcome to Blog Bees!</h1>
+    <p>
+        Unleash your creativity and share your stories with the world!
+        Here at Blog Bees, every voice matters. Whether you’re starting your first blog
+        or adding another chapter to your journey, we’re here to support your buzz!
+    </p>
+    <p>
+        Dive into a hive of ideas, connect with fellow bloggers, and spread your thoughts far and wide.
+        Let your words inspire and create ripples—because your blog can change the world, one post at a time.
+    </p>
+</div>
+
+<footer>
+    <p>&copy; 2024 Blog Bees. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

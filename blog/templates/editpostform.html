@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <style>
+    .form-container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #222;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-container h2 {
+      color: #ffb84d;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #fffae5;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #f7d358;
+      border-radius: 5px;
+      background-color: #333;
+      color: #fffae5;
+    }
+
+    input[type="file"] {
+      margin-top: 10px;
+      color: #fffae5;
+    }
+
+    .existing-image {
+      display: block;
+      margin-top: 10px;
+      max-width: 100%;
+      border: 2px solid #f7d358;
+      border-radius: 5px;
+    }
+
+    .submit-button {
+      background-color: #ffcc00;
+      color: #222;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: block;
+      margin: 20px auto;
+      transition: background 0.3s;
+    }
+
+    .submit-button:hover {
+      background-color: #ffdd57;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="header">
+  <h2>Blog Bees</h2>
+  <div class="header-right">
+    <p class="welcome">{{ user.username }}</p>
+    <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+  </div>
+</div>
+
+<div class="form-container">
+  <h2>Edit Post</h2>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div class="form-group">
+      <label for="title">Post Title</label>
+      <input type="text" id="title" name="title" value="{{ post.title }}" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="content">Post Content</label>
+      <textarea id="content" name="content" rows="5" required>{{ post.content }}</textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="image">Post Image (optional)</label>
+      {% if post.image %}
+        <img src="{{ post.image.url }}" alt="Existing Post Image" class="existing-image">
+      {% endif %}
+      <input type="file" id="image" name="image" accept="image/*">
+    </div>
+    
+    <button type="submit" class="submit-button">Update Post</button>
+  </form>
+</div>
+
+<script>
+    document.getElementById('edit-form').addEventListener('submit', function (e) {
+        e.preventDefault();  // Prevent default submission to allow history manipulation
+
+        // Redirect to the post view
+        window.location.replace("{% url 'post' post.id %}");
+
+        // Replace the current history state to avoid going back to edit form
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    });
+
+    // Block back navigation with the popstate event
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, window.location.href);
+    });
+</script>
+
+</body>
+</html>
